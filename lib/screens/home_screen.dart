@@ -53,11 +53,27 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    ApiService.fetchRecipes().then((recipes) {
-      setState(() {
-        featuredRecipes = recipes; // or whatever state var you're using
-      });
-    });
+    _loadRecipes();
+  }
+
+  Future<void> _loadRecipes() async {
+    try {
+      final data = await ApiService.fetchRecipes();
+      if (mounted) {
+        setState(() {
+          featuredRecipes = data['recipes'] as List<Recipe>;
+          isLoading = false;
+        });
+      }
+    } catch (error) {
+      if (mounted) {
+        setState(() {
+          isLoading = false;
+        });
+      }
+      print('Error fetching recipes: $error');
+      // You might want to show a snackbar or error message to the user
+    }
   }
 
   @override
