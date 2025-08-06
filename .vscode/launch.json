@@ -1,0 +1,11 @@
+{
+  "configurations": [
+    {
+      "name": "recipe_apps (Flutter Amir’s iPhone)",
+      "program": "lib/main.dart",
+      "deviceId": "00008110-00096C363C84801E",
+      "request": "launch",
+      "type": "dart"
+    }
+  ]
+}
